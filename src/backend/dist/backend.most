@@ -1,0 +1,228 @@
+// Version: 4.0.0
+type AccessControlState__201339279 =
+  {
+    var adminAssigned : Bool;
+    userRoles : Map__230067015<Principal, UserRole__91647283>
+  };
+type AspectScore__347542631 = {aspect : Text; score : Nat};
+type AspectScore__759460455 = {aspect : Text; score : Nat};
+type AspectScore__880366506 = {aspect : Text; score : Nat};
+type CareerTrial__145570640 =
+  {
+    brief : TaskBrief__120274418;
+    daysToComplete : Nat;
+    id : TrialId__84972264;
+    name : Text;
+    summary : Text;
+    tags : [Text]
+  };
+type CareerTrial__16886478 =
+  {
+    brief : TaskBrief__337919409;
+    daysToComplete : Nat;
+    id : TrialId__808383693;
+    name : Text;
+    summary : Text;
+    tags : [Text]
+  };
+type CareerTrial__975236576 =
+  {
+    brief : TaskBrief__905682533;
+    daysToComplete : Nat;
+    id : TrialId__898244148;
+    name : Text;
+    summary : Text;
+    tags : [Text]
+  };
+type Data__44217153<K, V> = {var count : Nat__227979830; kvs : [var ?(K, V)]};
+type EnrollmentId__1026904763 = Nat;
+type EnrollmentId__14938802 = Nat;
+type EnrollmentId__165279902 = Nat;
+type EnrollmentId__265255048 = EnrollmentId__165279902;
+type Enrollment__520198763 =
+  {
+    id : EnrollmentId__14938802;
+    progressPercent : Nat;
+    startedAt : Timestamp__71659004;
+    trialId : TrialId__898244148;
+    updatedAt : Timestamp__71659004
+  };
+type Enrollment__875508174 =
+  {
+    id : EnrollmentId__265255048;
+    progressPercent : Nat;
+    startedAt : Timestamp__830849117;
+    trialId : TrialId__808383693;
+    updatedAt : Timestamp__830849117
+  };
+type Enrollment__902958281 =
+  {
+    id : EnrollmentId__1026904763;
+    progressPercent : Nat;
+    startedAt : Timestamp__503351762;
+    trialId : TrialId__84972264;
+    updatedAt : Timestamp__503351762
+  };
+type EvidenceCard__326445687 =
+  {
+    aspectScores : [AspectScore__759460455];
+    completionPercent : Nat;
+    id : EvidenceId__504379645;
+    rating : Nat;
+    testerName : Text;
+    trialName : Text
+  };
+type EvidenceCard__785675649 =
+  {
+    aspectScores : [AspectScore__880366506];
+    completionPercent : Nat;
+    id : EvidenceId__313381760;
+    rating : Nat;
+    testerName : Text;
+    trialName : Text
+  };
+type EvidenceCard__787724327 =
+  {
+    aspectScores : [AspectScore__347542631];
+    completionPercent : Nat;
+    id : EvidenceId__400261860;
+    rating : Nat;
+    testerName : Text;
+    trialName : Text
+  };
+type EvidenceId__313381760 = EvidenceId__314303277;
+type EvidenceId__314303277 = Nat;
+type EvidenceId__400261860 = Nat;
+type EvidenceId__504379645 = Nat;
+type Internal__283199666<K, V> =
+  {children : [var ?Node__204828119<K, V>]; data : Data__44217153<K, V>};
+type Leaf__598469445<K, V> = {data : Data__44217153<K, V>};
+type Map__230067015<K, V> = Map__405889023<K, V>;
+type Map__405889023<K, V> = Map__603270868<K, V>;
+type Map__603270868<K, V> =
+  {var root : Node__204828119<K, V>; var size : Nat__227979830};
+type Nat__227979830 = Nat__920180692;
+type Nat__920180692 = Nat;
+type NewActor__252279821 =
+  {
+    accessControlState : AccessControlState__201339279;
+    enrollments :
+      Map__230067015<Principal,
+                      Map__230067015<EnrollmentId__1026904763,
+                                      Enrollment__902958281>>;
+    evidence : Map__230067015<EvidenceId__504379645, EvidenceCard__326445687>;
+    nextEnrollmentId : {var nextEnrollmentId : Nat};
+    var nextEvidenceId : Nat;
+    var nextTrialId : Nat;
+    trials : Map__230067015<TrialId__84972264, CareerTrial__145570640>
+  };
+type NewActor__928467162 =
+  {
+    accessControlState : AccessControlState__201339279;
+    enrollments :
+      Map__230067015<Principal,
+                      Map__230067015<EnrollmentId__14938802,
+                                      Enrollment__520198763>>;
+    evidence : Map__230067015<EvidenceId__400261860, EvidenceCard__787724327>;
+    nextEnrollmentId : {var nextEnrollmentId : Nat};
+    nextEvidenceId : {var nextEvidenceId : Nat};
+    var nextTrialId : Nat;
+    profiles : Map__230067015<Principal, StudentProfile__764959656>;
+    tests : Map__230067015<TrialId__898244148, [TestQuestion__380356600]>;
+    trials : Map__230067015<TrialId__898244148, CareerTrial__975236576>
+  };
+type Node__204828119<K, V> =
+  {#internal : Internal__283199666<K, V>; #leaf : Leaf__598469445<K, V>};
+type OldActor__1012822109 =
+  {
+    accessControlState : AccessControlState__201339279;
+    enrollments :
+      Map__230067015<Principal,
+                      Map__230067015<EnrollmentId__14938802,
+                                      Enrollment__520198763>>;
+    evidence : Map__230067015<EvidenceId__400261860, EvidenceCard__787724327>;
+    nextEnrollmentId : {var nextEnrollmentId : Nat};
+    var nextEvidenceId : Nat;
+    var nextTrialId : Nat;
+    trials : Map__230067015<TrialId__898244148, CareerTrial__975236576>
+  };
+type OldActor__798261290 = {};
+type StudentProfile__764959656 = {displayName : Text};
+type StudentProfile__856262922 = {displayName : Text};
+type TaskBrief__120274418 =
+  {checklist : [Text]; deliverables : [Text]; description : Text};
+type TaskBrief__337919409 =
+  {checklist : [Text]; deliverables : [Text]; description : Text};
+type TaskBrief__905682533 =
+  {checklist : [Text]; deliverables : [Text]; description : Text};
+type TestOption__1041959895 = {id : Nat; text : Text};
+type TestOption__87701836 = {id : Nat; text : Text};
+type TestQuestion__380356600 =
+  {
+    aspect : Text;
+    correctOptionId : Nat;
+    id : Nat;
+    options : [TestOption__1041959895];
+    prompt : Text
+  };
+type TestQuestion__626266082 =
+  {
+    aspect : Text;
+    correctOptionId : Nat;
+    id : Nat;
+    options : [TestOption__87701836];
+    prompt : Text
+  };
+type Timestamp__301639476 = Int;
+type Timestamp__503351762 = Int;
+type Timestamp__71659004 = Int;
+type Timestamp__830849117 = Timestamp__301639476;
+type TrialId__730739176 = Nat;
+type TrialId__808383693 = TrialId__730739176;
+type TrialId__84972264 = Nat;
+type TrialId__898244148 = Nat;
+type UserRole__91647283 = {#admin; #guest; #user};
+{
+  "20260921_190000" : (_old : OldActor__798261290) -> NewActor__252279821;
+  "20260921_200000" : (old : OldActor__1012822109) -> NewActor__928467162
+}
+actor  {
+  stable accessControlState :
+    {
+      var adminAssigned : Bool;
+      userRoles : Map__230067015<Principal, UserRole__91647283>
+    };
+  stable enrollments :
+    {
+      var root :
+        Node__204828119<Principal,
+                         Map__230067015<EnrollmentId__265255048,
+                                         Enrollment__875508174>>;
+      var size : Nat__227979830
+    };
+  stable evidence :
+    {
+      var root :
+        Node__204828119<EvidenceId__313381760, EvidenceCard__785675649>;
+      var size : Nat__227979830
+    };
+  stable nextEnrollmentId : {var nextEnrollmentId : Nat};
+  stable nextEvidenceId : {var nextEvidenceId : Nat};
+  stable var nextTrialId : Nat;
+  stable profiles :
+    {
+      var root : Node__204828119<Principal, StudentProfile__856262922>;
+      var size : Nat__227979830
+    };
+  stable tests :
+    {
+      var root :
+        Node__204828119<TrialId__808383693, [TestQuestion__626266082]>;
+      var size : Nat__227979830
+    };
+  stable trials :
+    {
+      var root : Node__204828119<TrialId__808383693, CareerTrial__16886478>;
+      var size : Nat__227979830
+    }
+};

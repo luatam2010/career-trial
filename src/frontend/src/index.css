@@ -1,0 +1,603 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------------------------------------------------------------
+   Self-hosted fonts — Career Trial
+   Display: Space Grotesk (geometric grotesque, confident headings)
+   Body:    Figtree (clean humanist sans, bilingual-safe)
+   Mono:    Geist Mono (numbers, prices, data chips)
+   --------------------------------------------------------------- */
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/assets/fonts/SpaceGrotesk.woff2") format("woff2");
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Figtree";
+  src: url("/assets/fonts/Figtree.woff2") format("woff2");
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/assets/fonts/GeistMono.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --font-display: "Space Grotesk", ui-sans-serif, sans-serif;
+    --font-body: "Figtree", ui-sans-serif, system-ui, sans-serif;
+    --font-mono: "Geist Mono", ui-monospace, monospace;
+    --radius: 0.875rem;
+
+    /* ---- Core surfaces (light) ---- */
+    --background: 0.985 0.006 165;
+    --foreground: 0.22 0.035 255;
+    --card: 1 0 0;
+    --card-foreground: 0.22 0.035 255;
+    --popover: 1 0 0;
+    --popover-foreground: 0.22 0.035 255;
+
+    /* ---- Brand: confident modern teal ---- */
+    --primary: 0.56 0.115 172;
+    --primary-foreground: 0.99 0.006 172;
+    --primary-deep: 0.44 0.085 176;
+
+    --secondary: 0.945 0.018 172;
+    --secondary-foreground: 0.28 0.05 200;
+    --muted: 0.955 0.012 170;
+    --muted-foreground: 0.5 0.022 250;
+
+    --accent: 0.62 0.12 168;
+    --accent-foreground: 0.99 0.006 168;
+
+    /* ---- Brand-specific tokens ---- */
+    --mint: 0.955 0.028 168;
+    --mint-deep: 0.9 0.045 170;
+    --mint-foreground: 0.28 0.06 200;
+    --heading: 0.24 0.05 260;
+    --cream: 0.97 0.038 92;
+    --cream-border: 0.9 0.06 88;
+    --cream-foreground: 0.34 0.06 62;
+
+    --success: 0.6 0.13 158;
+    --success-foreground: 0.99 0.006 158;
+    --warning: 0.78 0.13 78;
+    --warning-foreground: 0.3 0.05 62;
+
+    --destructive: 0.55 0.2 26;
+    --destructive-foreground: 0.99 0.006 26;
+
+    --border: 0.91 0.008 250;
+    --input: 0.91 0.008 250;
+    --ring: 0.56 0.115 172;
+
+    --chart-1: 0.56 0.115 172;
+    --chart-2: 0.68 0.11 190;
+    --chart-3: 0.62 0.12 140;
+    --chart-4: 0.78 0.13 78;
+    --chart-5: 0.5 0.09 255;
+
+    --sidebar: 0.975 0.012 170;
+    --sidebar-foreground: 0.24 0.05 260;
+    --sidebar-primary: 0.56 0.115 172;
+    --sidebar-primary-foreground: 0.99 0.006 172;
+    --sidebar-accent: 0.94 0.025 170;
+    --sidebar-accent-foreground: 0.28 0.06 200;
+    --sidebar-border: 0.91 0.012 250;
+    --sidebar-ring: 0.56 0.115 172;
+
+    /* ---- Effects ---- */
+    --gradient-primary: linear-gradient(
+      135deg,
+      oklch(0.6 0.12 172),
+      oklch(0.5 0.1 185)
+    );
+    --gradient-mint: linear-gradient(
+      180deg,
+      oklch(0.97 0.026 168),
+      oklch(0.94 0.04 172)
+    );
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --glow-color: 0.62 0.12 168;
+
+    /* ---- Quiz answer states (trial test) ----
+       Reuse existing hues: teal for selected, success for correct,
+       destructive for incorrect. Only the soft fills are new. */
+    --answer-surface: 1 0 0;
+    --answer-border: 0.89 0.012 200;
+    --answer-hover: 0.965 0.02 170;
+    --answer-selected: 0.93 0.045 172;
+    --answer-selected-border: 0.56 0.115 172;
+    --answer-selected-foreground: 0.34 0.07 190;
+    --answer-correct: 0.94 0.05 158;
+    --answer-correct-border: 0.6 0.13 158;
+    --answer-correct-foreground: 0.36 0.09 158;
+    --answer-incorrect: 0.94 0.035 26;
+    --answer-incorrect-border: 0.55 0.2 26;
+    --answer-incorrect-foreground: 0.42 0.15 26;
+
+    /* ---- Progress rail (question N of 5) ---- */
+    --progress-track: 0.92 0.02 170;
+    --progress-fill: 0.56 0.115 172;
+    --progress-fill-soft: 0.82 0.08 168;
+
+    /* ---- Score medallion ---- */
+    --score-ring: 0.62 0.12 168;
+    --score-surface: 0.97 0.026 168;
+  }
+
+  .dark {
+    --background: 0.155 0.022 255;
+    --foreground: 0.95 0.012 170;
+    --card: 0.2 0.024 255;
+    --card-foreground: 0.95 0.012 170;
+    --popover: 0.22 0.026 255;
+    --popover-foreground: 0.95 0.012 170;
+
+    --primary: 0.72 0.13 170;
+    --primary-foreground: 0.15 0.025 255;
+    --primary-deep: 0.62 0.11 176;
+
+    --secondary: 0.24 0.026 255;
+    --secondary-foreground: 0.88 0.014 170;
+    --muted: 0.24 0.026 255;
+    --muted-foreground: 0.68 0.02 200;
+
+    --accent: 0.72 0.13 168;
+    --accent-foreground: 0.15 0.025 168;
+
+    --mint: 0.26 0.04 172;
+    --mint-deep: 0.32 0.055 172;
+    --mint-foreground: 0.9 0.03 170;
+    --heading: 0.94 0.015 200;
+    --cream: 0.28 0.045 88;
+    --cream-border: 0.38 0.055 86;
+    --cream-foreground: 0.92 0.05 88;
+
+    --success: 0.72 0.13 158;
+    --success-foreground: 0.15 0.025 158;
+    --warning: 0.8 0.13 80;
+    --warning-foreground: 0.2 0.04 62;
+
+    --destructive: 0.66 0.19 24;
+    --destructive-foreground: 0.15 0.025 24;
+
+    --border: 0.3 0.024 255;
+    --input: 0.3 0.024 255;
+    --ring: 0.72 0.13 170;
+
+    --chart-1: 0.72 0.13 170;
+    --chart-2: 0.7 0.11 190;
+    --chart-3: 0.72 0.12 140;
+    --chart-4: 0.8 0.13 80;
+    --chart-5: 0.68 0.09 255;
+
+    --sidebar: 0.19 0.024 255;
+    --sidebar-foreground: 0.94 0.015 200;
+    --sidebar-primary: 0.72 0.13 170;
+    --sidebar-primary-foreground: 0.15 0.025 255;
+    --sidebar-accent: 0.26 0.04 172;
+    --sidebar-accent-foreground: 0.9 0.03 170;
+    --sidebar-border: 0.3 0.024 255;
+    --sidebar-ring: 0.72 0.13 170;
+
+    --gradient-primary: linear-gradient(
+      135deg,
+      oklch(0.74 0.13 172),
+      oklch(0.64 0.11 185)
+    );
+    --gradient-mint: linear-gradient(
+      180deg,
+      oklch(0.24 0.032 172),
+      oklch(0.28 0.045 176)
+    );
+    --glow-color: 0.72 0.13 168;
+
+    /* ---- Quiz answer states (dark counterpart) ---- */
+    --answer-surface: 0.24 0.026 255;
+    --answer-border: 0.34 0.028 250;
+    --answer-hover: 0.29 0.032 220;
+    --answer-selected: 0.32 0.05 176;
+    --answer-selected-border: 0.72 0.13 170;
+    --answer-selected-foreground: 0.9 0.035 172;
+    --answer-correct: 0.3 0.06 158;
+    --answer-correct-border: 0.72 0.13 158;
+    --answer-correct-foreground: 0.88 0.06 158;
+    --answer-incorrect: 0.31 0.06 26;
+    --answer-incorrect-border: 0.66 0.19 24;
+    --answer-incorrect-foreground: 0.86 0.07 26;
+
+    --progress-track: 0.3 0.03 210;
+    --progress-fill: 0.72 0.13 170;
+    --progress-fill-soft: 0.5 0.09 172;
+
+    --score-ring: 0.72 0.13 168;
+    --score-surface: 0.24 0.034 172;
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-heading-brand;
+    letter-spacing: -0.02em;
+  }
+  ::selection {
+    background: oklch(var(--mint-deep));
+    color: oklch(var(--mint-foreground));
+  }
+}
+
+@layer utilities {
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+
+  /* ---- Cursor-following colour glow ----
+     A fixed radial bloom that tracks the pointer via --cursor-x/--cursor-y
+     set from JS. Pure opacity/transform, GPU-composited. */
+  .cursor-glow {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      420px circle at var(--cursor-x, 50%) var(--cursor-y, 30%),
+      oklch(var(--glow-color) / 0.16),
+      transparent 65%
+    );
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    will-change: background, opacity;
+  }
+  .cursor-glow[data-active="true"] {
+    opacity: 1;
+  }
+
+  /* ---- Hover wobble / tilt ----
+     Apply to cards, images, avatars. Uses a 3D tilt with a gentle
+     oscillating settle. Transform-only so it stays on the compositor. */
+  .wobble-hover {
+    transform-style: preserve-3d;
+    transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow
+      0.45s ease;
+    will-change: transform;
+  }
+  .wobble-hover:hover {
+    animation: wobble 0.9s ease-in-out;
+    box-shadow: 0 18px 40px -18px oklch(var(--primary) / 0.35);
+  }
+  .tilt-hover {
+    transition: transform 0.35s cubic-bezier(0.34, 1.4, 0.64, 1);
+    will-change: transform;
+  }
+  .tilt-hover:hover {
+    transform: perspective(900px) rotateX(4deg) rotateY(-6deg) translateY(-4px)
+      scale(1.015);
+  }
+
+  /* ---- Scroll reveal ---- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s
+      cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: opacity, transform;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ---- Brand surfaces ---- */
+  .surface-mint {
+    background: oklch(var(--mint));
+    color: oklch(var(--mint-foreground));
+  }
+  .surface-cream {
+    background: oklch(var(--cream));
+    border: 1px solid oklch(var(--cream-border));
+    color: oklch(var(--cream-foreground));
+  }
+  .text-heading-brand {
+    color: oklch(var(--heading));
+  }
+  .bg-gradient-primary {
+    background-image: var(--gradient-primary);
+  }
+
+  /* ---- Small uppercase category label ---- */
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.18em];
+    color: oklch(var(--primary));
+  }
+
+  /* ---- Quiz: selectable answer option ----
+     Default → hover → selected → correct → incorrect. All five states
+     share one geometry so the card never reflows as state changes. */
+  .answer-option {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.875rem;
+    width: 100%;
+    text-align: left;
+    padding: 1rem 1.125rem;
+    border-radius: calc(var(--radius) - 2px);
+    border: 1.5px solid oklch(var(--answer-border));
+    background: oklch(var(--answer-surface));
+    color: oklch(var(--foreground));
+    cursor: pointer;
+    transition: border-color 0.22s ease, background-color 0.22s ease, transform
+      0.22s ease, box-shadow 0.22s ease;
+  }
+  .answer-option:hover:not(:disabled) {
+    border-color: oklch(var(--primary) / 0.55);
+    background: oklch(var(--answer-hover));
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px -14px oklch(var(--primary) / 0.45);
+  }
+  .answer-option:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px oklch(var(--ring) / 0.35);
+  }
+  .answer-option[aria-pressed="true"],
+  .answer-option[data-state="selected"] {
+    border-color: oklch(var(--answer-selected-border));
+    background: oklch(var(--answer-selected));
+    color: oklch(var(--answer-selected-foreground));
+    box-shadow: 0 10px 24px -16px oklch(var(--primary) / 0.5);
+  }
+  .answer-option[data-state="correct"] {
+    border-color: oklch(var(--answer-correct-border));
+    background: oklch(var(--answer-correct));
+    color: oklch(var(--answer-correct-foreground));
+  }
+  .answer-option[data-state="incorrect"] {
+    border-color: oklch(var(--answer-incorrect-border));
+    background: oklch(var(--answer-incorrect));
+    color: oklch(var(--answer-incorrect-foreground));
+  }
+  .answer-option[data-state="correct"] .answer-marker,
+  .answer-option[data-state="incorrect"] .answer-marker {
+    border-color: currentColor;
+  }
+
+  /* Letter marker (A/B/C/D) inside an answer option */
+  .answer-marker {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 0.5rem;
+    border: 1.5px solid oklch(var(--answer-border));
+    background: oklch(var(--muted));
+    color: oklch(var(--muted-foreground));
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    transition: inherit;
+  }
+  .answer-option:hover:not(:disabled) .answer-marker {
+    border-color: oklch(var(--primary) / 0.6);
+    color: oklch(var(--primary));
+  }
+  .answer-option[aria-pressed="true"] .answer-marker,
+  .answer-option[data-state="selected"] .answer-marker {
+    border-color: oklch(var(--answer-selected-border));
+    background: oklch(var(--primary));
+    color: oklch(var(--primary-foreground));
+  }
+  .answer-option[data-state="correct"] .answer-marker {
+    background: oklch(var(--answer-correct-border));
+    color: oklch(var(--answer-correct-foreground));
+  }
+  .answer-option[data-state="incorrect"] .answer-marker {
+    background: oklch(var(--answer-incorrect-border));
+    color: oklch(var(--answer-incorrect-foreground));
+  }
+
+  /* ---- Quiz: question progress rail (N of 5) ---- */
+  .progress-rail {
+    position: relative;
+    height: 0.375rem;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 9999px;
+    background: oklch(var(--progress-track));
+  }
+  .progress-rail-fill {
+    height: 100%;
+    border-radius: 9999px;
+    background-image: var(--gradient-primary);
+    transition: width 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  /* Discrete step dots for the 5-question sequence */
+  .progress-step {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 9999px;
+    background: oklch(var(--progress-track));
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  .progress-step[data-state="done"] {
+    background: oklch(var(--progress-fill-soft));
+  }
+  .progress-step[data-state="current"] {
+    background: oklch(var(--progress-fill));
+    transform: scale(1.35);
+  }
+
+  /* ---- Result: score medallion ---- */
+  .score-medallion {
+    display: grid;
+    place-items: center;
+    border-radius: 9999px;
+    background: radial-gradient(
+        circle at 32% 26%,
+        oklch(var(--card) / 0.9),
+        transparent 62%
+      ), oklch(var(--score-surface));
+    border: 2px solid oklch(var(--score-ring) / 0.35);
+    box-shadow: 0 22px 48px -26px oklch(var(--score-ring) / 0.55);
+  }
+  .score-figure {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    color: oklch(var(--heading));
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---- Result: per-aspect score bar ---- */
+  .aspect-track {
+    height: 0.5rem;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 9999px;
+    background: oklch(var(--progress-track));
+  }
+  .aspect-fill {
+    height: 100%;
+    border-radius: 9999px;
+    background-image: var(--gradient-primary);
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* ---- Signed-in student name chip ---- */
+  .student-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.3125rem 0.75rem 0.3125rem 0.375rem;
+    border-radius: 9999px;
+    border: 1px solid oklch(var(--mint-deep));
+    background: oklch(var(--mint));
+    color: oklch(var(--mint-foreground));
+    font-size: 0.8125rem;
+    font-weight: 600;
+    line-height: 1;
+    max-width: 100%;
+  }
+  .student-chip-monogram {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 9999px;
+    background: oklch(var(--primary));
+    color: oklch(var(--primary-foreground));
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 700;
+  }
+  .student-chip-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* ---- Question card: cream "unanswered" nudge ---- */
+  .quiz-nudge {
+    @apply text-sm font-medium;
+    background: oklch(var(--cream));
+    border: 1px solid oklch(var(--cream-border));
+    color: oklch(var(--cream-foreground));
+    border-radius: calc(var(--radius) - 4px);
+    padding: 0.625rem 0.875rem;
+  }
+}
+
+@keyframes wobble {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  20% {
+    transform: rotate(-1.6deg) scale(1.015);
+  }
+  45% {
+    transform: rotate(1.2deg) scale(1.02);
+  }
+  70% {
+    transform: rotate(-0.6deg) scale(1.012);
+  }
+  100% {
+    transform: rotate(0deg) scale(1.015);
+  }
+}
+
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Score medallion settles in after a submitted attempt */
+@keyframes score-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.86);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ---- Reduced motion: keep meaning, drop movement ---- */
+@media (prefers-reduced-motion: reduce) {
+  .cursor-glow {
+    display: none;
+  }
+  .wobble-hover:hover,
+  .tilt-hover:hover {
+    animation: none;
+    transform: none;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .answer-option:hover:not(:disabled) {
+    transform: none;
+  }
+  .progress-step[data-state="current"] {
+    transform: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

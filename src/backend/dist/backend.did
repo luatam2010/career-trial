@@ -1,0 +1,197 @@
+type Value = 
+ variant {
+   "bool": bool;
+   float: float64;
+   "int": int;
+   "nat": nat;
+   "null";
+   "text": text;
+ };
+type UserRole = 
+ variant {
+   admin;
+   guest;
+   user;
+ };
+type TrialTestView = 
+ record {
+   questions: vec TestQuestionView;
+   trialId: TrialId;
+   trialName: text;
+ };
+type TrialId = nat;
+type Timestamp = int;
+type TestResult = 
+ record {
+   aspectScores: vec AspectScore;
+   completionPercent: nat;
+   evidenceId: EvidenceId;
+   score: nat;
+   trialId: TrialId;
+   trialName: text;
+ };
+type TestQuestionView = 
+ record {
+   aspect: text;
+   id: nat;
+   options: vec TestOption;
+   prompt: text;
+ };
+type TestOption = 
+ record {
+   id: nat;
+   "text": text;
+ };
+type TestError = 
+ variant {
+   incomplete: vec nat;
+   invalidAnswer: nat;
+   notEnrolled: TrialId;
+   notSignedIn;
+   ok: TestResult;
+   unknownTrial: TrialId;
+ };
+type TestAnswer = 
+ record {
+   optionId: nat;
+   questionId: nat;
+ };
+type TaskBrief = 
+ record {
+   checklist: vec text;
+   deliverables: vec text;
+   description: text;
+ };
+type StudentProfile = record {displayName: text;};
+type Result__1 = 
+ variant {
+   err: Error;
+   ok;
+ };
+type Result = 
+ record {
+   hasMore: bool;
+   rows: vec vec Cell;
+ };
+type ProfileError = 
+ variant {
+   invalidName;
+   notSignedIn;
+   ok;
+ };
+type MyEvidenceCard = 
+ record {
+   aspectScores: vec AspectScore;
+   completionPercent: nat;
+   id: EvidenceId;
+   rating: nat;
+   trialId: TrialId;
+   trialName: text;
+ };
+type EvidenceId = nat;
+type EvidenceCard = 
+ record {
+   aspectScores: vec AspectScore;
+   completionPercent: nat;
+   id: EvidenceId;
+   rating: nat;
+   testerName: text;
+   trialName: text;
+ };
+type Error = 
+ variant {
+   AmbiguousAttribute: record {
+                         field: text;
+                         sources: vec text;
+                       };
+   FrontendOriginMismatch: record {
+                             expected: vec text;
+                             got: text;
+                           };
+   FrontendOriginsNotConfigured;
+   MalformedCandid;
+   MissingField: text;
+   MixedSsoSources: record {
+                      otherKeys: vec text;
+                      ssoKeys: vec text;
+                    };
+   NoAttributes;
+   Stale: record {ageNs: nat;};
+   UnknownNonce;
+   UntrustedSsoSource: record {domain: text;};
+ };
+type EnrollmentView = 
+ record {
+   id: EnrollmentId;
+   progressPercent: nat;
+   startedAt: Timestamp;
+   trialId: TrialId;
+   trialName: text;
+   updatedAt: Timestamp;
+ };
+type EnrollmentId = nat;
+type EnrollmentError = 
+ variant {
+   alreadyEnrolled: TrialId;
+   invalidProgress: nat;
+   notEnrolled: EnrollmentId;
+   notSignedIn;
+   ok: EnrollmentId;
+   unknownTrial: TrialId;
+ };
+type Cell = 
+ record {
+   name: text;
+   value: Value;
+ };
+type CareerTrial = 
+ record {
+   brief: TaskBrief;
+   daysToComplete: nat;
+   id: TrialId;
+   name: text;
+   summary: text;
+   tags: vec text;
+ };
+type AspectScore = 
+ record {
+   aspect: text;
+   score: nat;
+ };
+service : {
+  _initialize_access_control: () -> ();
+  _internet_identity_sign_in_finish: () -> (Result__1);
+  _internet_identity_sign_in_start: () -> (blob);
+  assignCallerUserRole: (user: principal, role: UserRole) -> ();
+  /// Enrol the caller in a career trial.
+  enroll: (trialId: TrialId) -> (EnrollmentError);
+  execute: (qJson: text) -> (Result) query;
+  /// Static Markdown documentation of this backend's public API.
+  getApiDoc: () -> (text) query;
+  getCallerUserRole: () -> (UserRole) query;
+  /// The caller's stored display name, or null when unset.
+  getMyProfile: () -> (opt StudentProfile) query;
+  /// The caller's own stored test result for a trial, or null when untested.
+  getMyTestResult: (trialId: TrialId) -> (opt TestResult) query;
+  /// One career trial by id.
+  getTrial: (id: TrialId) -> (opt CareerTrial) query;
+  /// A trial's knowledge test, without the correct answers.
+  getTrialTest: (trialId: TrialId) -> (opt TrialTestView) query;
+  isCallerAdmin: () -> (bool) query;
+  /// Public evidence cards.
+  listEvidence: () -> (vec EvidenceCard) query;
+  /// The caller's own enrolments.
+  listMyEnrollments: () -> (vec EnrollmentView) query;
+  /// The caller's own evidence cards.
+  listMyEvidence: () -> (vec MyEvidenceCard) query;
+  /// Public career trial catalogue.
+  listTrials: () -> (vec CareerTrial) query;
+  schema: () -> (text) query;
+  /// Store the caller's display name, used as `testerName` on published cards.
+  setMyDisplayName: (displayName: text) -> (ProfileError);
+  /// Submit a test attempt; the backend scores it and publishes an evidence card.
+  submitTest: (trialId: TrialId, answers: vec TestAnswer) -> (TestError);
+  /// Update the caller's own enrolment progress.
+  updateProgress: (enrollmentId: EnrollmentId, progressPercent: nat) ->
+   (EnrollmentError);
+}

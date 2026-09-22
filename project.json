@@ -1,0 +1,20 @@
+{
+  "overview": "A bilingual career-orientation site where high-school students try real career tasks, take short knowledge tests, and build a public evidence portfolio.",
+  "features": [
+    "Browse career trials with detailed task briefs",
+    "Take a short multiple-choice test for each trial",
+    "Get an automatic score with a per-aspect breakdown",
+    "Publish results as evidence cards on a public evidence wall",
+    "Sign in with Internet Identity to track your own progress",
+    "Switch between English and Vietnamese"
+  ],
+  "category": "education",
+  "tags": [
+    "career",
+    "education",
+    "students",
+    "bilingual",
+    "assessment"
+  ],
+  "last_updated": "2026-09-21T19:02:41.262Z"
+}
